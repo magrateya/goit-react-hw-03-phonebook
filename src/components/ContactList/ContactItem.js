@@ -6,7 +6,9 @@ export default function ContactItem({ id, name, number, onDeleteContact }) {
     <li className={s.contactItem}>
       <span>{name}</span>
       <span>{number}</span>
-      <button onClick={() => onDeleteContact(id)}>Delete</button>
+      <button type="submit" onClick={() => onDeleteContact(id)}>
+        Delete
+      </button>
     </li>
   );
 }
