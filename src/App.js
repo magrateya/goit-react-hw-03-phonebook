@@ -12,6 +12,23 @@ export default class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const storegeContacts = localStorage.getItem('contacts');
+    const parsedStorageContacts = JSON.parse(storegeContacts);
+    console.log(storegeContacts);
+    console.log(parsedStorageContacts);
+
+    if (parsedStorageContacts) {
+      this.setState({ contacts: parsedStorageContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   addContact = ({ name, number }) => {
     const { contacts } = this.state;
     if (
@@ -47,23 +64,6 @@ export default class App extends Component {
       contacts: prevState.contacts.filter(contact => contact.id !== contId),
     }));
   };
-
-  componentDidMount() {
-    const storegeContacts = localStorage.getItem('contacts');
-    const parsedStorageContacts = JSON.parse(storegeContacts);
-    console.log(storegeContacts);
-    console.log(parsedStorageContacts);
-
-    if (parsedStorageContacts) {
-      this.setState({ contacts: parsedStorageContacts });
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-    }
-  }
 
   render() {
     const visibleContacts = this.getVisibleContacts();
