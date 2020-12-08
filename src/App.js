@@ -15,8 +15,6 @@ export default class App extends Component {
   componentDidMount() {
     const storegeContacts = localStorage.getItem('contacts');
     const parsedStorageContacts = JSON.parse(storegeContacts);
-    console.log(storegeContacts);
-    console.log(parsedStorageContacts);
 
     if (parsedStorageContacts) {
       this.setState({ contacts: parsedStorageContacts });
